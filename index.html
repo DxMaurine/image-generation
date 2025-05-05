@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pollinations Image Generator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>AI Image Generator</h1>
+
+    <!-- Prompt input -->
+    <div class="input-group">
+      <label for="prompt">Enter your prompt:</label>
+      <input type="text" id="prompt" placeholder="e.g. a cyberpunk city at night" />
+    </div>
+
+    <!-- Artstyle dropdown -->
+    <div class="input-group">
+      <label for="artstyle">Choose art style (optional):</label>
+      <select id="artstyle">
+        <option value="">-- No Style --</option>
+        <option value="in the style of Impressionism">🎨 Impressionism</option>
+        <option value="in the style of Cyberpunk">🌌 Cyberpunk</option>
+        <option value="in the style of Steampunk">🔩 Steampunk</option>
+        <option value="in the style of Surrealism">👁️‍🗨️ Surrealism</option>
+        <option value="in the style of Baroque">🎭 Baroque</option>
+        <option value="in the style of Expressionism">🧠 Expressionism</option>
+        <option value="in the style of Futurism">🚀 Futurism</option>
+        <option value="in the style of Renaissance">🧙‍♂️ Renaissance</option>
+        <option value="in the style of RembolArt">🎨 RembolArt</option>
+      </select>
+    </div>
+
+    <!-- Resolution dropdown and manual input -->
+    <div class="input-group resolution-group">
+      <label for="resolutionPreset">Resolution Preset:</label>
+      <select id="resolutionPreset">
+        <option value="720x1280">📱 Portrait (720×1280)</option>
+        <option value="1024x1024">🖼️ Square (1024×1024)</option>
+        <option value="1280x720">🖥️ Landscape (1280×720)</option>
+        <option value="1080x1920">📷 Instagram Story (1080×1920)</option>
+      </select>
+
+      <label for="width">Width:</label>
+      <input type="number" id="width" min="128" max="2048" value="720" />
+
+      <label for="height">Height:</label>
+      <input type="number" id="height" min="128" max="2048" value="1280" />
+    </div>
+
+    <!-- Generate button -->
+    <button id="generateBtn">Generate</button>
+
+    <!-- Image result -->
+    <div class="result">
+      <h2>Generated Image:</h2>
+      <img id="generatedImage" src="" alt="Generated Art" />
+      <div class="button-group">
+        <button id="downloadBtn" disabled>Download</button>
+        <button id="saveBtn" disabled>Save</button>
+      </div>
+    </div>
+
+    <!-- Loading Modal -->
+    <div id="loadingModal" class="modal">
+      <div class="modal-content">
+        <p>Generating image...</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const promptInput = document.getElementById("prompt");
+    const generateBtn = document.getElementById("generateBtn");
+    const generatedImage = document.getElementById("generatedImage");
+    const downloadBtn = document.getElementById("downloadBtn");
+    const saveBtn = document.getElementById("saveBtn");
+    const loadingModal = document.getElementById("loadingModal");
+
+    let currentImage = null;
+
+    async function generateImage() {
+      const promptRaw = promptInput.value.trim();
+      if (!promptRaw) {
+        alert("Please enter a prompt");
+        return;
+      }
+
+      const styleValue = document.getElementById("artstyle").value;
+      const widthInput = document.getElementById("width");
+      const heightInput = document.getElementById("height");
+      const width = widthInput ? widthInput.value || 512 : 512;
+      const height = heightInput ? heightInput.value || 512 : 512;
+
+      const prompt = styleValue ? `${promptRaw}, ${styleValue}` : promptRaw;
+
+      loadingModal.classList.add("active");
+
+      try {
+        const apiUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=${width}&height=${height}`;
+        const response = await fetch(apiUrl);
+        if (!response.ok) throw new Error("Failed to generate image");
+
+        const contentType = response.headers.get("content-type");
+        if (!contentType.startsWith("image/")) {
+          const errorText = await response.text();
+          throw new Error(`Unexpected response: ${errorText}`);
+        }
+
+        const blob = await response.blob();
+        const imageUrl = URL.createObjectURL(blob);
+        generatedImage.src = imageUrl;
+
+        currentImage = { url: imageUrl, blob: blob, prompt: prompt, timestamp: new Date().toISOString() };
+        downloadBtn.disabled = false;
+        saveBtn.disabled = false;
+      } catch (error) {
+        alert("Gagal membuat gambar: " + error.message);
+        console.error(error);
+      } finally {
+        loadingModal.classList.remove("active");
+      }
+    }
+
+    // Resolusi preset handler
+    const resolutionPreset = document.getElementById("resolutionPreset");
+    const widthInput = document.getElementById("width");
+    const heightInput = document.getElementById("height");
+    resolutionPreset.addEventListener("change", () => {
+      const [w, h] = resolutionPreset.value.split("x").map(Number);
+      widthInput.value = w;
+      heightInput.value = h;
+    });
+
+    generateBtn.addEventListener("click", generateImage);
+  </script>
+  <script src="script.js"></script>
+
+</body>
+</html>
