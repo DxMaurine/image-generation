@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D AI Image Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-robot"></i> 3D AI Image Generator</h1>
+            <p>Create stunning images with AI powered by Pollinations API</p>
+        </header>
+
+        <div class="main-content">
+            <div class="generator-section">
+                <div class="input-card">
+                    <h2><i class="fas fa-magic"></i> Create New Image</h2>
+                    <div class="form-group">
+                        <label for="prompt"><i class="fas fa-comment-dots"></i> Prompt</label>
+                        <textarea id="prompt" placeholder="Describe the image you want to generate..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="style"><i class="fas fa-palette"></i> Style</label>
+                        <select id="style">
+                            <option value="realistic">Realistic</option>
+                            <option value="fantasy">Fantasy Art</option>
+                            <option value="anime">Anime</option>
+                            <option value="digital-art">Digital Art</option>
+                            <option value="comic-book">Comic Book</option>
+                            <option value="3d-model">3D Model</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-sliders-h"></i> Parameters</label>
+                        <div class="params-row">
+                            <div>
+                                <label for="steps">Steps</label>
+                                <input type="range" id="steps" min="10" max="100" value="50">
+                                <span id="steps-value">50</span>
+                            </div>
+                            <div>
+                                <label for="cfg-scale">CFG Scale</label>
+                                <input type="range" id="cfg-scale" min="1" max="20" value="7">
+                                <span id="cfg-value">7</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="generate-btn" class="btn-generate">
+                        <i class="fas fa-sparkles"></i> Generate Image
+                    </button>
+                </div>
+
+                <div class="result-card">
+                    <h2><i class="fas fa-image"></i> Generated Image</h2>
+                    <div class="image-placeholder" id="image-placeholder">
+                        <div class="placeholder-content">
+                            <i class="fas fa-image"></i>
+                            <p>Your generated image will appear here</p>
+                        </div>
+                    </div>
+                    <div class="result-actions">
+                        <button id="download-btn" class="btn-download" disabled>
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                        <button id="save-btn" class="btn-save" disabled>
+                            <i class="fas fa-save"></i> Save to History
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="history-section">
+                <h2><i class="fas fa-history"></i> Generation History</h2>
+                <div class="history-grid" id="history-grid">
+                    <!-- History items will be added here dynamically -->
+                    <div class="empty-history">
+                        <i class="fas fa-box-open"></i>
+                        <p>Your generated images will appear here</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>Powered by Pollinations AI API | © 2023 3D AI Image Generator</p>
+        </footer>
+    </div>
+
+    <div class="loading-modal" id="loading-modal">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p>Generating your image...</p>
+            <p class="loading-subtext">This may take a moment</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
