@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🚀TKK IMAGE CREATOR V.3 (FREE)🚀</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #9b2643;
+      --secondary-color: #a29bfe;
+      --dark-color: #2d3436;
+      --light-color: #f5f6fa;
+      --success-color: #00b894;
+      --warning-color: #fdcb6e;
+      --danger-color: #d63031;
+      --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      --card-border-radius: 15px;
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      color: var(--dark-color);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 3000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .main-content {
+      grid-column: 1;
+    }
+
+    .history-section {
+      grid-column: 2;
+    }
+
+    h1 {
+      grid-column: 1 / -1;
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: var(--card-border-radius);
+      box-shadow: var(--card-shadow);
+      transform: perspective(1000px) rotateX(0deg);
+      transition: var(--transition);
+      color: var(--primary-color);
+      font-size: 2.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+    }
+
+    h1:hover {
+      transform: perspective(1000px) rotateX(5deg);
+    }
+
+    .input-group {
+      background: white;
+      padding: 25px;
+      border-radius: var(--card-border-radius);
+      box-shadow: var(--card-shadow);
+      transform-style: preserve-3d;
+      transition: var(--transition);
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .input-group::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 10px;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--dark-color);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .input-group input, 
+    .input-group select {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      transition: var(--transition);
+      background-color: #f9f9f9;
+    }
+
+    .input-group input:focus, 
+    .input-group select:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+    }
+
+    .resolution-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .resolution-group > div {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .points-counter {
+      background: white;
+      padding: 15px;
+      border-radius: var(--card-border-radius);
+      box-shadow: var(--card-shadow);
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: var(--primary-color);
+    }
+
+    .points-counter span {
+      font-size: 1.5rem;
+    }
+
+    #generateBtn {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 90px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      width: 200%;
+      margin: 10px 0 20px;
+    }
+
+    #generateBtn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+    }
+
+    .result {
+      background: white;
+      padding: 25px;
+      border-radius: var(--card-border-radius);
+      box-shadow: var(--card-shadow);
+      transform-style: preserve-3d;
+      transition: var(--transition);
+      margin-bottom: 20px;
+    }
+
+    .result h2 {
+      color: var(--primary-color);
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #generatedImage {
+      max-width: 100%;
+      max-height: 500px;
+      border-radius: 8px;
+      display: none;
+      margin: 0 auto;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .button-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    #downloadBtn {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--success-color);
+      color: white;
+    }
+
+    #downloadBtn:hover {
+      background: #00a884;
+      transform: translateY(-2px);
+    }
+
+    #clearSettingsBtn {
+      padding: 30px 40px;
+      border: navy;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      flex: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center,center;
+      gap: 8px;
+      background: var(--danger-color);
+      color: white;
+    }
+
+    #clearSettingsBtn:hover {
+      background: #c0392b;
+      transform: translateY(-20px);
+    }
+
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition);
+    }
+
+    .modal.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 30px 40px;
+      border-radius: var(--card-border-radius);
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-content p {
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+      color: var(--dark-color);
+    }
+
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid var(--primary-color);
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .history-section {
+      background: white;
+      padding: 25px;
+      border-radius: var(--card-border-radius);
+      box-shadow: var(--card-shadow);
+      height: fit-content;
+    }
+
+    .history-section h2 {
+      color: var(--primary-color);
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .history-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 15px;
+      max-height: 600px;
+      overflow-y: auto;
+      padding: 5px;
+    }
+
+    .history-item {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: var(--transition);
+      aspect-ratio: 1/1;
+      background: #f9f9f9;
+      transform-style: preserve-3d;
+      transform: perspective(1000px) rotateY(0deg);
+      cursor: pointer;
+    }
+
+    .history-item:hover {
+      transform: perspective(1000px) rotateY(10deg) scale(1.05);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .history-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .history-item .delete-btn {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: rgba(214, 48, 49, 0.8);
+      color: white;
+      border: none;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transition: var(--transition);
+      z-index: 2;
+    }
+
+    .history-item:hover .delete-btn {
+      opacity: 1;
+    }
+
+    .empty-history {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      color: #999;
+      text-align: center;
+    }
+
+    .empty-history i {
+      font-size: 3rem;
+      margin-bottom: 15px;
+    }
+
+    footer {
+      grid-column: 1 / -1;
+      text-align: center;
+      margin-top: 20px;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: var(--card-border-radius);
+      box-shadow: var(--card-shadow);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer p {
+      color: var(--dark-color);
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    .social-btn {
+      background: #003dc0;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .social-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(59, 89, 152, 0.4);
+    }
+
+
+
+    /* Image Preview Modal */
+    .preview-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition);
+    }
+
+    .preview-modal.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .preview-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+    }
+
+    .preview-content img {
+      max-width: 100%;
+      max-height: 80vh;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .preview-info {
+      color: white;
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    .close-preview {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      background: var(--danger-color);
+      color: white;
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .close-preview:hover {
+      background: #c0392b;
+      transform: rotate(90deg);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+      
+      .history-section {
+        grid-column: 1;
+      }
+      
+      .resolution-group {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+
+     /* Sponsorship Box Styles */
+  .sponsorship-box {
+  background: white;
+  padding: 25px;
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--card-shadow);
+  margin-top: 30px;
+  border-top: 5px solid var(--primary-color);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: center;
+}
+
+  .sponsorship-box h3 {
+  color: var(--primary-color);
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.3rem;
+}
+
+  .sponsor-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+  .sponsor-logos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+  .sponsor-upload {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+  .sponsor-upload-label {
+  cursor: pointer;
+  display: block;
+  transition: var(--transition);
+}
+
+  .sponsor-upload-label:hover {
+  transform: translateY(-3px);
+}
+
+  .sponsor-logo {
+  width: 100%;
+  height: 80px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  padding: 10px;
+  transition: var(--transition);
+  border: 1px dashed #ddd;
+}
+
+  .sponsor-logo:hover {
+  transform: scale(1.05);
+  border-color: var(--primary-color);
+}
+
+  .become-sponsor {
+  margin-top: 10px;
+}
+
+  .become-sponsor a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 8px 15px;
+  border-radius: 6px;
+  background-color: rgba(108, 92, 231, 0.1);
+  transition: var(--transition);
+}
+
+  .become-sponsor a:hover {
+  background-color: rgba(108, 92, 231, 0.2);
+  color: var(--secondary-color);
+}
+
+  .sponsor-info {
+  padding: 15px;
+  background: rgba(108, 92, 231, 0.05);
+  border-radius: 8px;
+  border-left: 3px solid var(--primary-color);
+}
+
+  .sponsor-info p {
+  margin: 0;
+  color: var(--dark-color);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+  @media (max-width: 768px) {
+  .sponsorship-box {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .sponsor-logos {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+ /* WhatsApp specific styles */
+ .become-sponsor a {
+    background-color: #25D366 !important;
+    color: white !important;
+  }
+  
+  .become-sponsor a:hover {
+    background-color: #128C7E !important;
+  }
+  
+  .fa-whatsapp {
+    font-size: 1.2em;
+  }
+
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>
+       🚀TKK IMAGE V.3🚀
+       Create stuning image with us
+    </h1>
+
+    <div class="main-content">
+      <!-- Model selection -->
+      <div class="input-group">
+        <label for="model"><i class="fas fa-cogs"></i> AI Model:</label>
+        <select id="model">
+          <option value="FLUX">FLUX</option>
+          <option value="FLUX-Pro">FLUX PRO</option>
+        </select>
+      </div>
+
+      <!-- Prompt input -->
+      <div class="input-group">
+        <label for="prompt"><i class="fas fa-comment-dots"></i> Enter your prompt:</label>
+        <input type="text" id="prompt" placeholder="e.g. a cyberpunk city at night" />
+      </div>
+
+      <!-- Artstyle dropdown -->
+      <div class="input-group">
+        <label for="artstyle"><i class="fas fa-palette"></i> Choose art style (optional):</label>
+        <select id="artstyle">
+          <option value="">-- No Style --</option>
+          <option value="in the style of Impressionism">🎨 Impressionism</option>
+          <option value="in the style of Cyberpunk">🌌 Cyberpunk</option>
+          <option value="in the style of Steampunk">🔩 Steampunk</option>
+          <option value="in the style of Surrealism">👁️‍🗨️ Surrealism</option>
+          <option value="in the style of Baroque">🎭 Baroque</option>
+          <option value="in the style of Expressionism">🧠 Expressionism</option>
+          <option value="in the style of Futurism">🚀 Futurism</option>
+          <option value="in the style of Renaissance">🧙‍♂️ Renaissance</option>
+          <option value="in the style of RembolArt">🎨 RembolArt</option>
+        </select>
+      </div>
+
+      <!-- Resolution dropdown and manual input -->
+      <div class="input-group resolution-group">
+        <div>
+          <label for="resolutionPreset"><i class="fas fa-ruler-combined"></i> Resolution Preset:</label>
+          <select id="resolutionPreset">
+            <option value="720x1280">📱 Portrait (720×1280)</option>
+            <option value="1024x1024">🖼️ Square (1024×1024)</option>
+            <option value="1280x720">🖥️ Landscape (1280×720)</option>
+            <option value="1080x1920">📷 Instagram Story (1080×1920)</option>
+          </select>
+        </div>
+        
+        <div>
+          <label for="width"><i class="fas fa-arrows-alt-h"></i> Width:</label>
+          <input type="number" id="width" min="128" max="2048" value="720" />
+        </div>
+        
+        <div>
+          <label for="height"><i class="fas fa-arrows-alt-v"></i> Height:</label>
+          <input type="number" id="height" min="128" max="2048" value="1280" />
+        </div>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="button-group">
+        <button id="generateBtn">Generate</button>
+        <button id="clearSettingsBtn">Reset</button>
+      </div>
+      
+
+      <!-- Image result -->
+      <div class="result">
+        <h2><i class="fas fa-image"></i> Generated Image:</h2>
+        <img id="generatedImage" src="" alt="Generated Art" />
+        <div class="button-group">
+          <button id="downloadBtn" disabled><i class="fas fa-download"></i> Download</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- History Section -->
+    <div class="history-section">
+      <h2><i class="fas fa-history"></i> Generation History</h2>
+      <div class="history-grid" id="history-grid">
+        <div class="empty-history">
+          <i class="fas fa-box-open"></i>
+          <p>Your generated images will appear here</p>
+        </div>
+      </div>
+    </div>
+   <!-- Sponsorship Box -->
+<div class="sponsorship-box">
+  <div class="sponsor-content">
+    <h3><i class="fas fa-hand-holding-heart"></i> Supported By</h3>
+    <div class="sponsor-info">
+      <p>"Platform ini dapat beroperasi berkat dukungan luar biasa dari para sponsor. Ingin bergabung menjadi sponsor?"</p>
+    </div>
+    <div class="become-sponsor">
+      <a href="https://wa.me/6285117042204?text=Hello%2C%20I'm%20interested%20in%20becoming%20a%20sponsor%20for%20your%20platform" target="_blank">
+        <i class="fab fa-whatsapp"></i> Contact via WhatsApp
+      </a>
+    </div>
+  </div>
+  
+  <div class="sponsor-logos">
+    <!-- Sponsor 1 -->
+    <div class="sponsor-upload">
+      <input type="file" id="sponsor1-upload" accept="image/*" style="display: none;">
+      <label for="sponsor1-upload" class="sponsor-upload-label">
+        <img id="sponsor1-preview" src="https://via.placeholder.com/150x80?text=Sponsor+Logo" alt="Sponsor 1" class="sponsor-logo">
+      </label>
+    </div>
+
+    <!-- Sponsor 2 -->
+    <div class="sponsor-upload">
+      <input type="file" id="sponsor2-upload" accept="image/*" style="display: none;">
+      <label for="sponsor2-upload" class="sponsor-upload-label">
+        <img id="sponsor2-preview" src="https://via.placeholder.com/150x80?text=Sponsor+Logo" alt="Sponsor 2" class="sponsor-logo">
+      </label>
+    </div>
+
+  </div>
+</div>
+  
+    <footer>
+      <p>@Copyright | 2025  Support By TKK FB Group & Rembol Teams With ♥️ </p>
+      <a href="https://www.facebook.com/groups/407347088866675" target="_blank" class="social-btn">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </footer>
+
+    <!-- Loading Modal -->
+    <div id="loadingModal" class="modal">
+      <div class="modal-content">
+        <div class="spinner"></div>
+        <p>Generating image...</p>
+        <p class="loading-subtext">This may take a moment</p>
+      </div>
+    </div>
+
+    <!-- Image Preview Modal -->
+    <div id="previewModal" class="preview-modal">
+      <div class="preview-content">
+        <button class="close-preview">
+          <i class="fas fa-times"></i>
+        </button>
+        <img id="previewImage" src="" alt="Preview" />
+        <div class="preview-info">
+          <p id="previewPrompt"></p>
+          <p id="previewModel"></p>
+          <p id="previewDate"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    // DOM Elements
+    const promptInput = document.getElementById("prompt");
+    const generateBtn = document.getElementById("generateBtn");
+    const generatedImage = document.getElementById("generatedImage");
+    const downloadBtn = document.getElementById("downloadBtn");
+    const loadingModal = document.getElementById("loadingModal");
+    const historyGrid = document.getElementById("history-grid");
+    const modelSelect = document.getElementById("model");
+    const clearSettingsBtn = document.getElementById("clearSettingsBtn");
+    const previewModal = document.getElementById("previewModal");
+    const previewImage = document.getElementById("previewImage");
+    const previewPrompt = document.getElementById("previewPrompt");
+    const previewModel = document.getElementById("previewModel");
+    const previewDate = document.getElementById("previewDate");
+    const closePreview = document.querySelector(".close-preview");
+
+    // State
+    let currentImage = null;
+    let generationHistory = JSON.parse(localStorage.getItem('generationHistory')) || [];
+
+    // Initialize
+    loadHistory();
+
+    // Load history from localStorage
+    function loadHistory() {
+      historyGrid.innerHTML = '';
+      
+      if (generationHistory.length === 0) {
+        historyGrid.innerHTML = `
+          <div class="empty-history">
+            <i class="fas fa-box-open"></i>
+            <p>Your generated images will appear here</p>
+          </div>
+        `;
+        return;
+      }
+      
+      generationHistory.forEach((item, index) => {
+        const historyItem = document.createElement('div');
+        historyItem.className = 'history-item';
+        historyItem.innerHTML = `
+          <img src="${item.imageUrl}" alt="${item.prompt}">
+          <button class="delete-btn" data-index="${index}">
+            <i class="fas fa-times"></i>
+          </button>
+        `;
+        
+        historyItem.addEventListener('click', (e) => {
+          if (!e.target.classList.contains('delete-btn')) {
+            showPreview(item);
+          }
+        });
+        
+        const deleteBtn = historyItem.querySelector('.delete-btn');
+        deleteBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          deleteHistoryItem(index);
+        });
+        
+        historyGrid.appendChild(historyItem);
+      });
+    }
+
+    // Show image preview
+    function showPreview(item) {
+      previewImage.src = item.imageUrl;
+      previewPrompt.textContent = item.prompt;
+      previewModel.textContent = `Model: ${item.model}`;
+      previewDate.textContent = `Created: ${item.timestamp}`;
+      previewModal.classList.add('active');
+    }
+
+    // Close preview
+    closePreview.addEventListener('click', () => {
+      previewModal.classList.remove('active');
+    });
+
+    // Delete history item
+    function deleteHistoryItem(index) {
+      if (!confirm('Delete this image from history?')) return;
+      
+      generationHistory.splice(index, 1);
+      saveHistory();
+      loadHistory();
+    }
+
+    // Save history to localStorage
+    function saveHistory() {
+      localStorage.setItem('generationHistory', JSON.stringify(generationHistory));
+    }
+
+    // Add to history
+    function addToHistory(imageData) {
+      generationHistory.unshift(imageData);
+      if (generationHistory.length > 10) {
+        generationHistory = generationHistory.slice(0, 10);
+      }
+      saveHistory();
+      loadHistory();
+    }
+
+    clearSettingsBtn.addEventListener('click', () => {
+  if (confirm('Clear all settings and inputs?')) {
+    promptInput.value = '';
+    modelSelect.value = 'FLUX';
+    document.getElementById("artstyle").value = '';
+    document.getElementById("resolutionPreset").value = '720x1280';
+    document.getElementById("width").value = '720';
+    document.getElementById("height").value = '1280';
+    generatedImage.src = '';
+    generatedImage.style.display = 'none';
+    downloadBtn.disabled = true;
+
+    // Kosongkan array dan localStorage
+    generationHistory = [];
+    saveHistory();   // Simpan array kosong ke localStorage
+    loadHistory();   // Perbarui tampilan UI history
+  }
+});
+
+
+    // Generate image
+
+    async function generateImage() {
+      const promptRaw = promptInput.value.trim();
+      if (!promptRaw) {
+        alert("Please enter a prompt");
+        return;
+      }
+
+      const styleValue = document.getElementById("artstyle").value;
+      const widthInput = document.getElementById("width");
+      const heightInput = document.getElementById("height");
+      const width = widthInput ? widthInput.value || 512 : 512;
+      const height = heightInput ? heightInput.value || 512 : 512;
+      const model = modelSelect.value;
+
+      const prompt = styleValue ? `${promptRaw}, ${styleValue}` : promptRaw;
+
+      loadingModal.classList.add("active");
+
+      try {
+        const apiUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=${width}&height=${height}&model=${model}&nologo=true`;
+        const response = await fetch(apiUrl);
+        if (!response.ok) throw new Error("Failed to generate image");
+
+        const contentType = response.headers.get("content-type");
+        if (!contentType.startsWith("image/")) {
+          const errorText = await response.text();
+          throw new Error(`Unexpected response: ${errorText}`);
+        }
+
+        const blob = await response.blob();
+        const imageUrl = URL.createObjectURL(blob);
+        generatedImage.src = imageUrl;
+        generatedImage.style.display = 'block';
+
+        currentImage = { 
+          url: imageUrl, 
+          blob: blob, 
+          prompt: prompt, 
+          model: model,
+          timestamp: new Date().toLocaleString()
+        };
+        
+        downloadBtn.disabled = false;
+        
+        // Add to history
+        addToHistory({
+          imageUrl: imageUrl,
+          prompt: prompt,
+          model: model,
+          timestamp: new Date().toLocaleString()
+        });
+      } catch (error) {
+        alert("Failed to generate image: " + error.message);
+        console.error(error);
+      } finally {
+        loadingModal.classList.remove("active");
+      }
+    }
+    
+
+    // Resolution preset handler
+    const resolutionPreset = document.getElementById("resolutionPreset");
+    const widthInput = document.getElementById("width");
+    const heightInput = document.getElementById("height");
+    resolutionPreset.addEventListener("change", () => {
+      const [w, h] = resolutionPreset.value.split("x").map(Number);
+      widthInput.value = w;
+      heightInput.value = h;
+    });
+
+    // Event listeners
+    generateBtn.addEventListener("click", generateImage);
+    
+    downloadBtn.addEventListener("click", () => {
+      if (!currentImage) return;
+      
+      const a = document.createElement('a');
+      a.href = currentImage.url;
+      a.download = `ai-image-${Date.now()}.png`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+
+    // Close preview when clicking outside
+    previewModal.addEventListener('click', (e) => {
+      if (e.target === previewModal) {
+        previewModal.classList.remove('active');
+      }
+    });
+    // Image upload functionality
+  document.getElementById('sponsor1-upload').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        document.getElementById('sponsor1-preview').src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  document.getElementById('sponsor2-upload').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        document.getElementById('sponsor2-preview').src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  document.getElementById('sponsor3-upload').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        document.getElementById('sponsor3-preview').src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  </script>
+</body>
+</html>
