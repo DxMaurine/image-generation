@@ -642,6 +642,61 @@
   }
 
 
+    /* Visi & Misi Styles */
+.vision-mission {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.vision-mission-card {
+  background: white;
+  padding: 25px;
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--card-shadow);
+  border-top: 5px solid var(--primary-color);
+}
+
+.vision-mission-card h3 {
+  color: var(--primary-color);
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.2rem;
+}
+
+.vision-mission-card p {
+  line-height: 1.6;
+  color: var(--dark-color);
+}
+
+.vision-mission-card ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.vision-mission-card li {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  line-height: 1.5;
+}
+
+.vision-mission-card i {
+  color: var(--primary-color);
+  margin-top: 3px;
+}
+
+@media (max-width: 768px) {
+  .vision-mission {
+    grid-template-columns: 1fr;
+  }
+}
+
+
   </style>
 </head>
 <body>
@@ -734,6 +789,24 @@
         </div>
       </div>
     </div>
+
+    <!-- Tambahkan ini setelah </div> penutup history-section dan sebelum sponsorship-box -->
+<div class="vision-mission">
+  <div class="vision-mission-card">
+    <h3><i class="fas fa-eye"></i> Visi Kami</h3>
+    <p>Menjadi platform generasi gambar AI yang inovatif dan mudah diakses oleh semua orang, menghadirkan kreativitas tanpa batas melalui teknologi mutakhir.</p>
+  </div>
+  
+  <div class="vision-mission-card">
+    <h3><i class="fas fa-bullseye"></i> Misi Kami</h3>
+    <ul>
+      <li><i class="fas fa-rocket"></i> Memberikan pengalaman generasi gambar yang cepat dan berkualitas</li>
+      <li><i class="fas fa-users"></i> Membuka akses seni digital untuk semua kalangan</li>
+      <li><i class="fas fa-lightbulb"></i> Mendorong kreativitas tanpa batas dengan teknologi AI</li>
+      <li><i class="fas fa-sync-alt"></i> Terus berinovasi untuk memberikan fitur terbaik</li>
+    </ul>
+  </div>
+</div>
    <!-- Sponsorship Box -->
 <div class="sponsorship-box">
   <div class="sponsor-content">
