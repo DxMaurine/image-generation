@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rembol 3D Image Generator</title>
+  <title>🤖DREAMFLUX V.2🤖</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
@@ -200,9 +200,6 @@
       box-shadow: 0 5px 10px rgba(255, 255, 255, 0.1);
     }
 
-
-
-
   </style>
 </head>
 <body>
@@ -224,8 +221,8 @@
         <div class="col-md-3">
           <label for="model" class="form-label">Model:</label>
           <select class="form-select" id="model">
-            <option value="FLUX">Flux Schnell</option>
-            <option value="Flux Pro">Flux Pro</option>
+            <option value="FLUX">Flux (Costum)</option>
+            <option value="Flux Pro">Flux Realism</option>
           </select>
         </div>
         <div class="col-md-3">
@@ -428,7 +425,7 @@
         img.onclick = () => {
           modalImage.src = url;
           modalDownload.href = url;
-          modalDownload.download = `rembol_${model}_${Date.now()}.png`;
+          modalDownload.download = `rembol_${model}_${Date.now()}.jpeg`;
           modalDescription.innerText = `Prompt: ${prompt} | Model: ${model}`;
           previewModal.show();
         };
