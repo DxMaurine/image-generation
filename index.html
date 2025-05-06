@@ -935,33 +935,37 @@
 
     // Generate image
 
-    async function generateImage() {
-      const promptRaw = promptInput.value.trim();
-      if (!promptRaw) {
+   async function generateImage() {
+    const promptRaw = promptInput.value.trim();
+    if (!promptRaw) {
         alert("Please enter a prompt");
         return;
-      }
+    }
 
-      const styleValue = document.getElementById("artstyle").value;
-      const widthInput = document.getElementById("width");
-      const heightInput = document.getElementById("height");
-      const width = widthInput ? widthInput.value || 512 : 512;
-      const height = heightInput ? heightInput.value || 512 : 512;
-      const model = modelSelect.value;
+    const styleValue = document.getElementById("artstyle").value;
+    const widthInput = document.getElementById("width");
+    const heightInput = document.getElementById("height");
+    const width = widthInput ? widthInput.value || 512 : 512;
+    const height = heightInput ? heightInput.value || 512 : 512;
+    const model = modelSelect.value;
 
-      const prompt = styleValue ? `${promptRaw}, ${styleValue}` : promptRaw;
+    const prompt = styleValue ? `${promptRaw}, ${styleValue}` : promptRaw;
 
-      loadingModal.classList.add("active");
+    loadingModal.classList.add("active");
 
-      try {
-        const apiUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt + ', Surealism, A-cyberpunk, photorealistic, cinematic')}?width=${width}&height=${height}&model=${model}&nologo=true&seed=`;
-         const response = await fetch(apiUrl);
+    try {
+        // Generate random seed between 1 and 100000
+        const randomSeed = Math.floor(Math.random() * 100000) + 1;
+        
+        const apiUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt + ', Surealism, A-cyberpunk, photorealistic, cinematic')}?width=${width}&height=${height}&model=${model}&nologo=true&seed=${randomSeed}`;
+        
+        const response = await fetch(apiUrl);
         if (!response.ok) throw new Error("Failed to generate image");
 
         const contentType = response.headers.get("content-type");
         if (!contentType.startsWith("image/")) {
-          const errorText = await response.text();
-          throw new Error(`Unexpected response: ${errorText}`);
+            const errorText = await response.text();
+            throw new Error(`Unexpected response: ${errorText}`);
         }
 
         const blob = await response.blob();
@@ -970,14 +974,23 @@
         generatedImage.style.display = 'block';
 
         currentImage = { 
-          url: imageUrl, 
-          blob: blob, 
-          prompt: prompt, 
-          model: model,
-          timestamp: new Date().toLocaleString()
+            url: imageUrl, 
+            blob: blob, 
+            prompt: prompt, 
+            model: model,
+            seed: randomSeed, // Menyimpan seed yang digunakan
+            timestamp: new Date().toLocaleString()
         };
         
         downloadBtn.disabled = false;
+        
+    } catch (error) {
+        console.error("Error generating image:", error);
+        alert(`Error: ${error.message}`);
+    } finally {
+        loadingModal.classList.remove("active");
+    }
+}
         
         // Add to history
         addToHistory({
@@ -994,20 +1007,7 @@
       }
     }
     
-    function generateRandomSeed(min = 1, max = 999999) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function generateImage(prompt, model = "flux", width = 720, height = 1280) {
-  const seed = generateRandomSeed();
-  const fullPrompt = `${prompt}, Surealism, A-cyberpunk, photorealistic, cinematic`;
-  const encodedPrompt = encodeURIComponent(fullPrompt);
-
-   // Contoh: tampilkan di <img id="resultImage">
-  document.getElementById("resultImage").src = url;
-}
-    
-    // Resolution preset handler
+        // Resolution preset handler
     const resolutionPreset = document.getElementById("resolutionPreset");
     const widthInput = document.getElementById("width");
     const heightInput = document.getElementById("height");
