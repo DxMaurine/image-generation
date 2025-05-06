@@ -954,7 +954,7 @@
       loadingModal.classList.add("active");
 
       try {
-        const apiUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=${width}&height=${height}&style=Surealism A-cyberpunk photorealistic cinematic&model=${model}&nologo=true&seed=`;
+        const apiUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=${width}&height=${height}&Surealism&A-cyberpunk&photorealistic&cinematic&model=${model}&nologo=true&seed=`;
         const response = await fetch(apiUrl);
         if (!response.ok) throw new Error("Failed to generate image");
 
