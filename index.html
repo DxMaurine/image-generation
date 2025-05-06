@@ -984,15 +984,7 @@
         
         downloadBtn.disabled = false;
         
-    } catch (error) {
-        console.error("Error generating image:", error);
-        alert(`Error: ${error.message}`);
-    } finally {
-        loadingModal.classList.remove("active");
-    }
-}
-        
-        // Add to history
+       // Add to history
         addToHistory({
           imageUrl: imageUrl,
           prompt: prompt,
