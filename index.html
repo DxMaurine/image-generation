@@ -1003,9 +1003,7 @@ function generateImage(prompt, model = "flux", width = 720, height = 1280) {
   const fullPrompt = `${prompt}, Surealism, A-cyberpunk, photorealistic, cinematic`;
   const encodedPrompt = encodeURIComponent(fullPrompt);
 
-  const url = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=${width}&height=${height}&model=${model}&nologo=true&seed=${seed}`;
-
-  // Contoh: tampilkan di <img id="resultImage">
+   // Contoh: tampilkan di <img id="resultImage">
   document.getElementById("resultImage").src = url;
 }
     
