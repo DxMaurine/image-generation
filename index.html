@@ -994,7 +994,21 @@
       }
     }
     
+    function generateRandomSeed(min = 1, max = 999999) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
+function generateImage(prompt, model = "flux", width = 720, height = 1280) {
+  const seed = generateRandomSeed();
+  const fullPrompt = `${prompt}, Surealism, A-cyberpunk, photorealistic, cinematic`;
+  const encodedPrompt = encodeURIComponent(fullPrompt);
+
+  const url = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=${width}&height=${height}&model=${model}&nologo=true&seed=${seed}`;
+
+  // Contoh: tampilkan di <img id="resultImage">
+  document.getElementById("resultImage").src = url;
+}
+    
     // Resolution preset handler
     const resolutionPreset = document.getElementById("resolutionPreset");
     const widthInput = document.getElementById("width");
