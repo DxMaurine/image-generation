@@ -512,6 +512,10 @@
         modalDownload.download = `rembol_${model}_${Date.now()}.jpeg`;
         modalDescription.innerText = `Prompt: ${prompt} | Model: ${model}`;
         previewModal.show();
+        // Event klik tombol unduh
+         modalDownload.onclick = () => {
+        // Browser akan otomatis mengunduh file dari URL
+        };
       };
 
       coins--;
