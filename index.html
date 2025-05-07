@@ -508,8 +508,9 @@
 
       img.onclick = () => {
         modalImage.src = url;
-        modalDownload.href = url;
-        modalDownload.download = `rembol_${model}_${Date.now()}.jpeg`;
+        modalDownload.onclick = (e) => {
+        e.preventDefault(); // Mencegah perilaku default
+        forceDownload(url, `rembol_${model}_${Date.now()}.jpeg`);
         modalDescription.innerText = `Prompt: ${prompt} | Model: ${model}`;
         previewModal.show();
         // Event klik tombol unduh
@@ -539,8 +540,22 @@
     };
   }
 };
-
-
+ 
+// Fungsi untuk memaksa download
+function forceDownload(url, fileName) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", url, true);
+    xhr.responseType = "blob";
+    xhr.onload = function() {
+        const blob = xhr.response;
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = fileName;
+        link.click();
+        window.URL.revokeObjectURL(link.href);
+    };
+    xhr.send();
+}
       async function forceDownloadImage(url, filename) {
   try {
     const response = await fetch(url, { mode: 'cors' });
