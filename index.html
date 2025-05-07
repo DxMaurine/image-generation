@@ -429,8 +429,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">🌄 Preview Gambar</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button
         <div class="modal-body text-center">
           <img id="modalImage" src="" class="img-fluid rounded mb-3" alt="Preview">
           <p id="modalDescription" class="text-muted"></p>
@@ -513,7 +512,7 @@
         modalDescription.innerText = `Prompt: ${prompt} | Model: ${model}`;
         previewModal.show();
         // Event klik tombol unduh
-         modalDownload.onclick = () => {
+        modalDownload.onclick = () => {
         // Browser akan otomatis mengunduh file dari URL
         };
       };
@@ -540,21 +539,7 @@
   }
 };
  
-// Fungsi untuk memaksa download
-function forceDownload(url, fileName) {
-    const xhr = new XMLHttpRequest();
-    xhr.open("GET", url, true);
-    xhr.responseType = "blob";
-    xhr.onload = function() {
-        const blob = xhr.response;
-        const link = document.createElement('a');
-        link.href = window.URL.createObjectURL(blob);
-        link.download = fileName;
-        link.click();
-        window.URL.revokeObjectURL(link.href);
-    };
-    xhr.send();
-}
+
       async function forceDownloadImage(url, filename) {
   try {
     const response = await fetch(url, { mode: 'cors' });
