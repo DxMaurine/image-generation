@@ -508,9 +508,8 @@
 
       img.onclick = () => {
         modalImage.src = url;
-        modalDownload.onclick = (e) => {
-        e.preventDefault(); // Mencegah perilaku default
-        forceDownload(url, `rembol_${model}_${Date.now()}.jpeg`);
+        modalDownload.href = url;
+        modalDownload.download = `rembol_${model}_${Date.now()}.jpeg`;
         modalDescription.innerText = `Prompt: ${prompt} | Model: ${model}`;
         previewModal.show();
         // Event klik tombol unduh
