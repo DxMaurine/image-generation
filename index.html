@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🤖DREAMFLUX V.2🤖</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+      /* ==================== */
+      /* BASE STYLES          */
+      /* ==================== */
+      body {
+        background: linear-gradient(145deg, #f5f5f5, #e0e0e0);
+        color: #333;
+        padding-top: 30px;
+        font-family: 'Segoe UI', system-ui, sans-serif;
+        min-height: 100vh;
+      }
+
+      .container {
+        text-align: center;
+        margin-bottom: 2rem;
+        padding: 2rem;
+        background: rgba(30, 154, 255, 0.1);
+        border-radius: 16px;
+        backdrop-filter: blur(8px);
+        border: 2px solid rgba(30, 154, 255, 0.3);
+        box-shadow: 0 4px 20px rgba(30, 154, 255, 0.15);
+        transition: all 0.4s ease;
+      }
+
+      /* ==================== */
+      /* TYPOGRAPHY           */
+      /* ==================== */
+      .title-3d {
+        font-size: 3rem;
+        font-weight: 700;
+        color: rgb(30, 154, 255);
+        margin-bottom: 0.5rem;
+        display: inline-block;
+        position: relative;
+        animation: float 3s ease-in-out infinite;
+      }
+
+      .subtitle {
+        font-size: 1.25rem;
+        font-weight: 500;
+        color: white;
+        display: inline-block;
+        padding: 0.5rem 1.25rem;
+        border-radius: 50px;
+        background: rgb(30, 154, 255);
+        box-shadow: 0 4px 15px rgba(30, 154, 255, 0.4);
+        position: relative;
+        overflow: hidden;
+      }
+
+      h1, h2, h3 {
+        text-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+      }
+
+      /* ==================== */
+      /* CARDS & CONTAINERS   */
+      /* ==================== */
+      .card {
+        background: #f0f0f0;
+        border: none;
+        border-radius: 25px;
+        box-shadow:
+          inset 8px 8px 16px rgba(0, 0, 0, 0.15),
+          inset -8px -8px 16px rgba(255, 255, 255, 0.8),
+          6px 6px 12px rgba(0, 0, 0, 0.05);
+        margin-bottom: 40px;
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        border: 1px solid rgba(255,255,255,0.2);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card:hover {
+        transform: translateY(-5px) scale(1.01);
+        box-shadow:
+          inset 6px 6px 12px rgba(0, 0, 0, 0.1),
+          inset -6px -6px 12px rgba(255, 255, 255, 0.7),
+          0 10px 25px rgba(0,0,0,0.15);
+      }
+
+      /* ==================== */
+      /* FORM ELEMENTS        */
+      /* ==================== */
+      .form-control, .form-select {
+        background: #f8f8f8;
+        color: #333;
+        border: none;
+        border-radius: 12px;
+        box-shadow:
+          inset 4px 4px 8px rgba(0, 0, 0, 0.1),
+          inset -4px -4px 8px rgba(255, 255, 255, 0.7);
+        padding: 12px 15px;
+        transition: all 0.3s ease;
+      }
+
+      .form-control:focus, .form-select:focus {
+        background: #fff;
+        box-shadow:
+          inset 2px 2px 4px rgba(0, 0, 0, 0.1),
+          inset -2px -2px 4px rgba(255, 255, 255, 0.7),
+          0 0 0 3px rgba(0, 123, 255, 0.25);
+      }
+
+      /* ==================== */
+      /* BUTTONS              */
+      /* ==================== */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 20px;
+        margin: 10 8px;
+        border: none;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        gap: 8px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      }
+
+      .btn-primary {
+        background: linear-gradient(145deg, #0069d9, #004ba0);
+        color: white;
+        padding: 0.75rem 1.5rem;        /* Perbesar area klik */
+        font-size: 1.2rem;              /* Perbesar teks */
+        border-radius: 0.5rem;          /* Tambah sudut melengkung */
+        font-weight: 600;               /* Bold agar menonjol */
+        box-shadow:
+            0 6px 12px rgba(0, 0, 0, 0.15),
+            inset 0 1px 1px rgba(255, 255, 255, 0.2);
+        transition: all 0.2s ease-in-out;
+        margin-top: 10px;
+        margin-bottom: 10px;
+
+
+        }
+
+        .btn-primary:hover {
+        filter: brightness(1.1);        /* Efek saat hover */
+        transform: scale(1.02);
+        }
+
+
+        .btn-secondary {
+        background: linear-gradient(145deg, #ff5500, #ff9800);
+        color: white;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        
+      }
+
+        .btn-secondary:hover {
+        filter: brightness(1.1);
+        transform: scale(1.02);
+        }
+
+
+      /* Action Buttons */
+      #copyPrompt {
+        background: rgba(76, 175, 80, 0.9);
+        border-left: 3px solid #4CAF50;
+      }
+
+      #pastePrompt {
+        background: rgba(255, 152, 0, 0.9);
+        border-left: 3px solid #FF9800;
+      }
+
+      #clearPrompt {
+        background: rgba(244, 67, 54, 0.9);
+        border-left: 3px solid #F44336;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      }
+
+      .btn:active {
+        transform: translateY(1px);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      }
+
+      /* ==================== */
+      /* COMPONENTS           */
+      /* ==================== */
+      /* Spinner */
+      #spinner-overlay {
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 220px;
+          height: 220px;
+          background: rgba(240, 240, 240, 0.95);
+          border-radius: 25px;
+          display: none;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          z-index: 9999;
+          box-shadow:
+              inset 5px 5px 15px rgba(0, 0, 0, 0.1),
+              0 10px 30px rgba(0, 0, 0, 0.2);
+          backdrop-filter: blur(5px);
+          overflow: hidden;
+      }
+
+      /* 3D Spinner Element */
+      .spinner {
+          width: 60px;
+          height: 60px;
+          position: relative;
+          animation: spin 1.8s linear infinite;
+      }
+
+      .spinner::before,
+      .spinner::after {
+          content: '';
+          position: absolute;
+          border-radius: 50%;
+      }
+
+      /* Outer Ring */
+      .spinner::before {
+          width: 100%;
+          height: 100%;
+          border: 8px solid rgba(30, 154, 255, 0.2);
+          border-top-color: rgb(30, 154, 255);
+          box-shadow:
+              0 0 15px rgba(30, 154, 255, 0.5),
+              inset 0 0 10px rgba(30, 154, 255, 0.3);
+      }
+
+      /* Inner Dot */
+      .spinner::after {
+          width: 20px;
+          height: 20px;
+          background: rgb(30, 154, 255);
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          box-shadow:
+              0 0 10px rgba(30, 154, 255, 0.8);
+      }
+
+      /* Pulsing Effect */
+      .spinner-pulse {
+          width: 100px;
+          height: 100px;
+          background: rgba(30, 154, 255, 0.1);
+          border-radius: 50%;
+          position: absolute;
+          animation: pulse 2s ease-out infinite;
+      }
+
+      /* Loading Text */
+      .spinner-text {
+          margin-top: 25px;
+          font-weight: 600;
+          color: #333;
+          text-transform: uppercase;
+          letter-spacing: 2px;
+          font-size: 14px;
+          animation: textPulse 1.5s ease-in-out infinite alternate;
+      }
+
+      /* Background Circles */
+      .spinner-bg-circle {
+          position: absolute;
+          border-radius: 50%;
+          background: rgba(30, 154, 255, 0.05);
+          animation: float 6s ease-in-out infinite alternate;
+      }
+
+      .spinner-bg-circle:nth-child(1) {
+          width: 40px;
+          height: 40px;
+          top: 20px;
+          left: 20px;
+          animation-delay: 0s;
+      }
+
+      .spinner-bg-circle:nth-child(2) {
+          width: 60px;
+          height: 60px;
+          bottom: 30px;
+          right: 30px;
+          animation-delay: 0.5s;
+      }
+
+      /* Animations */
+      @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+      }
+
+      @keyframes pulse {
+          0% { transform: scale(0.6); opacity: 0.6; }
+          50% { transform: scale(1); opacity: 0.2; }
+          100% { transform: scale(0.6); opacity: 0.6; }
+      }
+
+      @keyframes textPulse {
+          0% { opacity: 0.6; transform: translateY(0); }
+          100% { opacity: 1; transform: translateY(-5px); }
+      }
+
+      @keyframes float {
+          0% { transform: translateY(0) rotate(0deg); }
+          100% { transform: translateY(-20px) rotate(10deg); }
+      }
+
+      /* Dark Mode Support */
+      .dark-mode #spinner-overlay {
+          background: rgba(30, 30, 30, 0.95);
+      }
+
+      .dark-mode .spinner::before {
+          border-top-color: rgb(100, 200, 255);
+          box-shadow:
+              0 0 15px rgba(100, 200, 255, 0.5),
+              inset 0 0 10px rgba(100, 200, 255, 0.3);
+      }
+
+      .dark-mode .spinner::after {
+          background: rgb(100, 200, 255);
+          box-shadow: 0 0 10px rgba(100, 200, 255, 0.8);
+      }
+
+      .dark-mode .spinner-text {
+          color: #f0f0f0;
+      }
+
+      /* History Items */
+      .history-item {
+          display: flex;
+          align-items: center;
+          background: #f8f8f8;
+          border-radius: 18px;
+          padding: 12px;
+          box-shadow:
+              inset 4px 4px 8px rgba(0,0,0,0.05),
+              inset -4px -4px 8px rgba(255,255,255,0.5),
+              5px 5px 15px rgba(0,0,0,0.05);
+          margin-bottom: 15px;
+          transition: all 0.3s ease;
+          width: 100%;
+      }
+
+      .history-item img {
+          width: 40%; /* Set image width to 40% of container */
+          height: auto; /* Maintain aspect ratio */
+          max-width: 150px; /* Optional: set maximum width */
+          border-radius: 12px;
+          margin-right: 15px;
+          object-fit: cover;
+          box-shadow:
+              4px 4px 8px rgba(0,0,0,0.1),
+              -4px -4px 8px rgba(255,255,255,0.5);
+          transition: transform 0.3s ease;
+      }
+
+      .history-item .history-content {
+          width: 60%; /* Remaining 60% for content */
+          padding: 5px;
+      }
+
+    /* For responsive adjustment */
+      @media (max-width: 768px) {
+      .history-item {
+          flex-direction: column;
+      }
+      
+      .history-item img {
+          width: 50%;
+          max-width: none;
+          margin-right: 0;
+          margin-bottom: 10px;
+      }
+      
+      .history-item .history-content {
+          width: 50%;
+      }
+  }
+
+      /* ==================== */
+      /* ANIMATIONS           */
+      /* ==================== */
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-8px); }
+      }
+
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+      }
+
+      /* ==================== */
+      /* DARK MODE            */
+      /* ==================== */
+      body.dark-mode {
+        background: linear-gradient(145deg, #121212, #2a2a2a);
+        color: #e0e0e0;
+      }
+
+      .dark-mode .card {
+        background: #1e1e1e;
+        box-shadow:
+          inset 5px 5px 10px rgba(0,0,0,0.3),
+          inset -5px -5px 10px rgba(60,60,60,0.2);
+      }
+
+      /* ==================== */
+      /* RESPONSIVE           */
+      /* ==================== */
+      @media (max-width: 768px) {
+        .title-3d {
+          font-size: 2.2rem;
+        }
+        .subtitle {
+          font-size: 1rem;
+        }
+        .btn {
+          padding: 8px 12px;
+          margin: 0 4px;
+        }
+      }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1 class="title-3d mb-2">DreamFlux.2</h1>
+    <div class="subtitle">🎨Share Your Imagination🎨</div>
+    </div>
+
+    <div class="card p-4">
+      <div class="mb-3">
+        <label for="prompt" class="form-label">Prompt:</label>
+        <textarea class="form-control" id="prompt" rows="3" placeholder="Masukkan prompt..."></textarea>
+        <div class="prompt-controls">
+          <button id="copyPrompt" class="btn" title="Copy Prompt">
+            📋 Copy
+          </button>
+          <button id="pastePrompt" class="btn" title="Paste Prompt">
+            📥 Paste
+          </button>
+          <button id="clearPrompt" class="btn" title="Clear Prompt">
+            ❌ Clear
+          </button>
+        </div>
+        
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-3">
+          <label for="model" class="form-label">Model:</label>
+          <select class="form-select" id="model">
+            <option value="FLUX">Flux (Costum)</option>
+            <option value="Flux Pro">Flux Realism</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label for="style" class="form-label">Style:</label>
+          <select class="form-select" id="style">
+            <option value="Photorealistic">Photorealistic</option>
+            <option value="Abstract">Abstract</option>
+            <option value="Impressionist">Impressionist</option>
+            <option value="Surrealism">Surrealism</option>
+            <option value="Minimalist">Minimalist</option>
+            <option value="Pop Art">Pop Art</option>
+            <option value="Cubism">Cubism</option>
+            <option value="Pixel Art">Pixel Art</option>
+            <option value="Anime">Anime</option>
+            <option value="Comic Book">Comic Book</option>
+            <option value="Watercolor">Watercolor</option>
+            <option value="Oil Painting">Oil Painting</option>
+            <option value="Charcoal">Charcoal</option>
+            <option value="Pencil Sketch">Pencil Sketch</option>
+            <option value="Digital Art">Digital Art</option>
+            <option value="Vaporwave">Vaporwave</option>
+            <option value="Steampunk">Steampunk</option>
+            <option value="VividNeonCyberpunk">VividNeonCyberpunk</option>
+            <option value="Art Nouveau">Art Nouveau</option>
+            <option value="Art Deco">Art Deco</option>
+            <option value="Gothic">Gothic</option>
+            <option value="Renaissance">Renaissance</option>
+            <option value="Baroque">Baroque</option>
+            <option value="Expressionism">Expressionism</option>
+            <option value="Futurism">Futurism</option>
+          </select>
+            
+          <div class="col-md-3">
+            <label for="preset" class="form-label"><span style="color: red; font-weight: bold;">Opsi Preset Art:</span></label>
+            <select id="preset" class="form-select">
+              <option value="">-- Pilih Preset --</option>
+              <option disabled>👇Special Choice Art👇</option>
+              <option value="rembolArt">RembolTeamArt</option>
+              <option disabled>----Male Editor-----</option>
+              <option value="JatiArt">JatiArt</option>
+              <option value="RakaiArt">RakaiArt</option>
+              <option value="IvanArt">IvanArt</option>
+              <option value="AryaArt">AryaArt</option>
+              <option value="RuDiArt">RuDiArt</option>
+              <option value="JalitengArt">JalitengArt</option>
+              <option disabled>----Female Editor-----</option>
+              <option value="VemyArt">VemyArt</option>
+              <option value="LarasArt">LarasArt</option>
+              <option value="VeeArt">VeeArt</option>
+              <!-- Bisa ditambah preset lain -->
+            </select>
+          </div>
+
+        </div>
+        <div class="col-md-3">
+          <label for="effect" class="form-label">Effect:</label>
+          <select class="form-select" id="effect">
+            <option value="Cinematic" selected>Cinematic</option>
+            <option value="Vintage">Vintage</option>
+            <option value="Noir">Noir</option>
+            <option value="Sepia">Sepia</option>
+            <option value="Vivid">Vivid</option>
+            <option value="HDR">HDR</option>
+            <option value="Blur">Blur</option>
+            <option value="Vignette">Vignette</option>
+            <option value="High Contrast">High Contrast</option>
+            <option value="Low Contrast">Low Contrast</option>
+            <option value="Saturation">Saturation</option>
+            <option value="Desaturation">Desaturation</option>
+            <option value="Retro">Retro</option>
+            <option value="Film Grain">Film Grain</option>
+            <option value="Dreamy">Dreamy</option>
+            <option value="Infrared">Infrared</option>
+            <option value="Polaroid">Polaroid</option>
+            <option value="Dramatic">Dramatic</option>
+            <option value="Soft Focus">Soft Focus</option>
+            <option value="Tilt-Shift">Tilt-Shift</option>
+            <option value="Bokeh">Bokeh</option>
+            <option value="Cross Process">Cross Process</option>
+            <option value="Negative">Negative</option>
+            <option value="Solarize">Solarize</option>
+            <option value="Fisheye">Fisheye</option>
+            <option value="Glitch">Glitch</option>
+            <option value="Mosaic">Mosaic</option>
+            <option value="Double Exposure">Double Exposure</option>
+            <option value="Holga">Holga</option>
+            <option value="Lomo">Lomo</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label for="size" class="form-label">Ukuran:</label>
+          <select class="form-select" id="size">
+            <option value="1080x1920">Potret HD</option>
+            <option value="1920x1080">Landscape HD</option>
+          </select>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="batch" class="form-label">Batch Number:</label>
+        <input type="number" class="form-control" id="batch" value="1" min="1" max="10">
+      </div>
+      <button id="generateBtn" class="btn btn-primary w-100">Generate Image (100 Coins)</button>
+      <button id="clearSettings" class="btn btn-secondary w-100">Clear All Settings</button>
+      <button id="themeToggle" class="btn btn-outline-secondary w-100">Switch Tema</button>
+    </div>
+
+    <div class="card p-4">
+      <h3><span style="color: rgb(30, 154, 255); font-weight: bold;"> 📝Generated history</span></h3>
+      <span style="color: rgb(0, 0, 0); font-weight: lighter; font-size: 15px;"> 👇Gambar Muncul disini & Klik pada Gambar Untuk Download</span> 
+      <div id="history"></div>
+    </div>
+
+    <div class="card p-4">
+      <h3><h3><span style="color: rgb(30, 154, 255); font-weight: bold;">🚦Visi & Misi</span></h3></h3>
+      <p><strong>Visi:</strong> Menjadi platform AI generatif terdepan yang menginspirasi kreativitas visual di seluruh dunia.</p>
+      <p><strong>Misi:</strong></p>
+      <ul>
+        <li>Menyediakan akses mudah ke teknologi AI visual secara kreatif dan menyenangkan.</li>
+        <li>Mendukung seniman digital dan kreator konten dalam menghasilkan karya luar biasa.</li>
+        <li>Menjadi ruang eksplorasi gaya visual tanpa batas.</li>
+      </ul>
+    </div>
+
+    <div class="card p-4">
+      <h3><span style="color: red; font-weight: bold;"> 🔗Supported By:</span></h3>
+      <p>Kunjungi partner kami di <a href="https://www.facebook.com/groups/407347088866675" target="_blank" class="text-decoration-none text-primary">Titik Kumpul Kreasi</a> untuk akses penuh teknologi AI canggih.</p>
+    </div>
+
+    <footer>
+      &copy; 2025 |❤️Rembol Teams & <a href="https://www.facebook.com/groups/407347088866675" target="_blank" class="text-decoration-none text-primary">Titik Kumpul Kreasi</a> </p>
+    </footer>
+  </div>
+
+  <div id="spinner-overlay">
+    <div class="spinner"></div>
+    <div class="message" style="color: black;">Generating...</div>
+
+  </div>
+  
+
+  <!-- Modal Preview -->
+  <div class="modal fade" id="previewModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold mb-0">🌄Preview Image</h5>
+          <button type="button" class="btn-close" style="filter: invert(18%) sepia(97%) saturate(7491%) hue-rotate(359deg) brightness(98%) contrast(112%);" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center">
+          <img id="modalImage" src="" class="img-fluid rounded mb-3" alt="Preview">
+          <p id="modalDescription" class="text-muted"></p>
+          <a id="modalDownload"class="btn btn-success"download>Download</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+
+// Coin System
+let coins = 100;
+let lastRefill = Date.now();
+
+function refillCoins() {
+    if (Date.now() - lastRefill >= 3600000) {
+        coins = 100;
+        lastRefill = Date.now();
+        updateButton();
+    }
+}
+setInterval(refillCoins, 60000);
+
+// DOM Elements
+const generateBtn = document.getElementById("generateBtn");
+const spinnerOverlay = document.getElementById("spinner-overlay");
+const historyEl = document.getElementById("history");
+const previewModal = new bootstrap.Modal(document.getElementById('previewModal'));
+const modalImage = document.getElementById("modalImage");
+const modalDownload = document.getElementById("modalDownload");
+const modalDescription = document.getElementById("modalDescription");
+
+// Update Button State
+function updateButton() {
+    if (coins > 0) {
+        generateBtn.innerText = `Generate Image (${coins} Coins)`;
+        generateBtn.disabled = false;
+    } else {
+        generateBtn.innerText = `Generate Image (0 Coins – Tunggu 1 jam)`;
+        generateBtn.disabled = true;
+    }
+}
+
+// Image Generation
+    generateBtn.onclick = async function () {
+    const prompt = document.getElementById("prompt").value;
+    const model = document.getElementById("model").value;
+    const style = document.getElementById("style").value;
+    const effect = document.getElementById("effect").value;
+    const size = document.getElementById("size").value;
+    const batch = parseInt(document.getElementById("batch").value) || 1;
+
+    if (!prompt || coins <= 0) return;
+
+    spinnerOverlay.style.display = "flex";
+    let generated = 0;
+
+    for (let i = 0; i < batch && coins > 0; i++) {
+        const seed = Math.floor(Math.random() * 1000000);
+        const fullPrompt = `${prompt} --style ${style} --model ${model} --effect ${effect}`;
+        const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(fullPrompt)}?width=${size.split("x")[0]}&height=${size.split("x")[1]}&nologo=true&seed=${seed}`;
+
+        const item = document.createElement("div");
+        item.className = "history-item";
+
+        const img = document.createElement("img");
+        img.src = url;
+        img.alt = prompt;
+
+        img.onload = () => {
+            const maxLength = 50;
+            const shortPrompt = prompt.length > maxLength ? 
+                prompt.substring(0, maxLength) + '...' : 
+                prompt;
+
+            const desc = document.createElement("div");
+            desc.innerHTML = `<strong>Prompt:</strong> ${shortPrompt}<br><strong>Model:</strong> ${model}`;
+            
+            item.appendChild(img);
+            item.appendChild(desc);
+            historyEl.prepend(item);
+
+            img.onclick = () => {
+                modalImage.src = url;
+                modalDownload.setAttribute('data-url', url);
+                modalDownload.setAttribute('data-model', model);
+                modalDownload.setAttribute('data-prompt', prompt);
+                modalDescription.innerText = `Prompt: ${shortPrompt} | Model: ${model}`;
+                modalDescription.title = prompt;
+                previewModal.show();
+            };
+
+            coins--;
+            generated++;
+
+            if (generated === batch || coins === 0) {
+                spinnerOverlay.style.display = "none";
+                updateButton();
+            }
+        };
+
+        img.onerror = () => {
+            console.error("Failed to load image:", url);
+            generated++;
+            if (generated === batch || coins === 0) {
+                spinnerOverlay.style.display = "none";
+                updateButton();
+            }
+        };
+    }
+};
+
+//improve download
+modalDownload.addEventListener('click', async function (e) {
+    e.preventDefault();
+
+    const imageUrl = modalDownload.getAttribute('data-url');
+    const model = modalDownload.getAttribute('data-model') || 'image';
+    const prompt = modalDownload.getAttribute('data-prompt') || '';
+    
+    // Format nama file
+    const words = prompt.trim().split(/\s+/).slice(0, 6).join('_');
+    const fileName = `${model}_${words || 'image'}.jpg`;
+
+    try {
+        // 1. Fetch gambar sebagai blob
+        const response = await fetch(imageUrl);
+        if (!response.ok) throw new Error('Gagal mengunduh gambar');
+        const blob = await response.blob();
+
+        // 2. Buat URL objek dari blob
+        const blobUrl = window.URL.createObjectURL(blob);
+
+        // 3. Buat elemen <a> untuk download
+        const link = document.createElement('a');
+        link.href = blobUrl;
+        link.download = fileName;
+        link.style.display = 'none';
+        document.body.appendChild(link);
+
+        // 4. Trigger klik dan bersihkan
+        link.click();
+        setTimeout(() => {
+            window.URL.revokeObjectURL(blobUrl);
+            document.body.removeChild(link);
+        }, 100);
+    } catch (error) {
+        console.error('Error:', error);
+        // Fallback: Buka tab baru jika fetch gagal
+        window.open(imageUrl, '_blank');
+    }
+});
+
+  
+
+
+
+// Clear Settings
+document.getElementById("clearSettings")?.addEventListener("click", () => {
+    const promptInput = document.getElementById("prompt");
+    if (promptInput) promptInput.value = "";
+
+    ["model", "style", "effect", "size", "batch"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.selectedIndex = 0;
+    });
+
+    const history = document.getElementById("history");
+    if (history) {
+        history.classList.add("fade-out");
+        setTimeout(() => {
+            history.innerHTML = "";
+            history.classList.remove("fade-out");
+        }, 500);
+    }
+
+    alert("All settings have been reset!");
+});
+
+// Preset Selector
+const presetSelector = document.getElementById("preset");
+presetSelector?.addEventListener("change", () => {
+    const preset = presetSelector.value;
+    const styleSelector = document.getElementById("style");
+    const effectSelector = document.getElementById("effect");
+
+    if (preset === "rembolArt") {
+        styleSelector.value = "VividNeonCyberpunk";
+        effectSelector.value = "Cinematic";
+    }
+    else if (preset === "VemyArt") {
+        styleSelector.value = "Steampunk";
+        effectSelector.value = "Glitch";
+    }
+});
+
+// Theme Toggle
+if (localStorage.theme === "dark") {
+    document.body.classList.add("dark-mode");
+}
+
+document.getElementById("themeToggle")?.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+    localStorage.theme = document.body.classList.contains("dark-mode") ? "dark" : "light";
+});
+
+// Copy/Paste/Clear Prompt
+document.getElementById("copyPrompt")?.addEventListener("click", async () => {
+    try {
+        await navigator.clipboard.writeText(document.getElementById("prompt").value);
+        alert("Prompt copied to clipboard!");
+    } catch (err) {
+        alert("Failed to copy: " + err);
+    }
+});
+
+document.getElementById("pastePrompt")?.addEventListener("click", async () => {
+    try {
+        const text = await navigator.clipboard.readText();
+        document.getElementById("prompt").value = text;
+    } catch (err) {
+        alert("Failed to paste: " + err);
+    }
+});
+
+document.getElementById("clearPrompt")?.addEventListener("click", () => {
+    document.getElementById("prompt").value = "";
+});
+
+// Initialize
+updateButton();
+
+
+</script>
+
+</body>
+</html>
