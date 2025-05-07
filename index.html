@@ -505,7 +505,7 @@
       const desc = document.createElement("div");
       desc.innerHTML = `<strong>Prompt:</strong> ${prompt}<br><strong>Model:</strong> ${model}`;
       item.appendChild(img);
-      item.appendChild(desc);
+      item.appendChild();
       historyEl.prepend(item);
 
       img.onclick = () => {
