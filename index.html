@@ -995,39 +995,6 @@ document.getElementById("clearPrompt")?.addEventListener("click", () => {
 updateButton();
 
 
-// Tampilkan histori dari localStorage saat halaman dimuat
-    window.onload = function () {
-        const savedHistory = JSON.parse(localStorage.getItem("history")) || [];
-        for (const entry of savedHistory) {
-            const item = document.createElement("div");
-            item.className = "history-item";
-
-            const img = document.createElement("img");
-            img.src = entry.url;
-            img.alt = entry.prompt;
-
-            const desc = document.createElement("div");
-            desc.innerHTML = `<strong>Prompt:</strong> ${entry.shortPrompt}<br><strong>Model:</strong> ${entry.model}`;
-
-            item.appendChild(img);
-            item.appendChild(desc);
-            historyEl.prepend(item);
-
-            img.onclick = () => {
-                modalImage.src = entry.url;
-                modalDownload.setAttribute('data-url', entry.url);
-                modalDownload.setAttribute('data-model', entry.model);
-                modalDownload.setAttribute('data-prompt', entry.prompt);
-                modalDescription.innerText = `Prompt: ${entry.shortPrompt} | Model: ${entry.model}`;
-                modalDescription.title = entry.prompt;
-                previewModal.show();
-            };
-        }
-    };
-
-
-
-
 
 </script>
 
