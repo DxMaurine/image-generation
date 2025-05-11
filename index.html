@@ -492,21 +492,27 @@
                 transition: background-color 0.3s;
             }
 
-.accordion-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  background: #f0f0f0;
-  border: none;
-  padding: 10px;
-  font-size: 16px;
-  cursor: pointer;
+
+
+.accordion-header .arrow {
+  transition: transform 0.3s ease;
 }
 
-.arrow {
-  margin-left: 8px;
-  font-size: 14px;
+.accordion-header.active .arrow {
+  transform: rotate(180deg);
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  background: #fafafa;
+  padding: 0 10px;
+}
+
+.accordion-header.active + .accordion-content {
+  max-height: 200px; /* sesuaikan sesuai konten */
+  padding: 10px;
 }
 
 
