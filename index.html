@@ -492,19 +492,25 @@
                 transition: background-color 0.3s;
             }
 
-            
-.accordion-header:hover {
-                background-color: #e05a2b;
-            }
+.accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background: #f0f0f0;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
 
-            .accordion-content {
-                padding: 0 20px;
-                max-height: 0;
-                overflow: hidden;
-                background-color: var(--light);
-                color: var(--text-primary);
-                transition: max-height 0.4s ease, padding 0.3s ease;
-            }
+.arrow {
+  margin-left: 8px;
+  font-size: 14px;
+}
+
+
+        
             .accordion-content p {
                 margin: 15px 0;
             }
