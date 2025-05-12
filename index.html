@@ -86,7 +86,7 @@
       }
 
       try {
-        const res = await fetch(`https://wuszigmegagdwlbjftpm.supabase.co/rest/v1/access_key?token=eq.${token}&is_used=eq.false&select=*`, {
+        const res = await fetch(`https://wuszigmegagdwlbjftpm.supabase.co/rest/v1/access_key?token=eq.${token}&select=*`, {
           headers: {
             apikey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind1c3ppZ21lZ2FnZHdsYmpmdHBtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDcwMDM4MzIsImV4cCI6MjA2MjU3OTgzMn0.QNbieip8O2I4fjkcS6DtS13jgmZC87uov4AjICuvELU',
             Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind1c3ppZ21lZ2FnZHdsYmpmdHBtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDcwMDM4MzIsImV4cCI6MjA2MjU3OTgzMn0.QNbieip8O2I4fjkcS6DtS13jgmZC87uov4AjICuvELU'
@@ -96,16 +96,29 @@
         const data = await res.json();
         
         if (data && data.length > 0) {
-          // Token valid
-          resultDiv.textContent = "Login berhasil! Token valid.";
-          resultDiv.style.display = "block";
-          resultDiv.style.color = "#4CAF50";
+          const tokenData = data[0];
           
-          // Redirect atau lakukan aksi setelah login berhasil
-           window.location.href = "dasboard.html";
+          // Cek apakah token sudah digunakan
+          if (tokenData.is_used) {
+            errorDiv.textContent = "Token sudah digunakan";
+            return;
+          }
+          
+          // Cek masa berlaku token
+          const now = new Date();
+          const expiryDate = new Date(tokenData.expires_at);
+          if (now > expiryDate) {
+            errorDiv.textContent = "Token sudah kadaluarsa";
+            return;
+          }
+          
+          // Simpan data token di sessionStorage untuk digunakan di dashboard
+          sessionStorage.setItem('tokenData', JSON.stringify(tokenData));
+          
+          // Redirect ke dashboard dengan membawa token di URL
+          window.location.href = `dashboard.html?token=${encodeURIComponent(token)}`;
         } else {
-          // Token tidak valid
-          errorDiv.textContent = "Token tidak valid atau sudah digunakan";
+          errorDiv.textContent = "Token tidak valid";
         }
       } catch (err) {
         console.error("Error:", err);
