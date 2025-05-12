@@ -59,6 +59,28 @@
       color: #f44336;
       margin-top: 1rem;
     }
+
+    /* Animasi munculnya pesan sukses */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Kelas animasi untuk pesan sukses */
+.success {
+  background-color: #e8f5e9;
+  color: #4caf50;
+  border: 1px solid #4caf50;
+  animation: fadeIn 0.5s ease-out;
+}
+
+
   </style>
 </head>
 <body>
@@ -114,6 +136,11 @@
           
           // Simpan data token di sessionStorage untuk digunakan di dashboard
           sessionStorage.setItem('tokenData', JSON.stringify(tokenData));
+
+          // Menampilkan hasil sukses dengan animasi
+      resultDiv.style.display = "block";
+      resultDiv.classList.add('success');
+      resultDiv.textContent = "Login berhasil! Anda akan diarahkan ke dashboard...";
           
           // Redirect ke dashboard dengan membawa token di URL
           window.location.href = `dasboard.html?token=${encodeURIComponent(token)}`;
