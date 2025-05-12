@@ -116,7 +116,7 @@
           sessionStorage.setItem('tokenData', JSON.stringify(tokenData));
           
           // Redirect ke dashboard dengan membawa token di URL
-          window.location.href = `dashboard.html?token=${encodeURIComponent(token)}`;
+          window.location.href = `dasboard.html?token=${encodeURIComponent(token)}`;
         } else {
           errorDiv.textContent = "Token tidak valid";
         }
