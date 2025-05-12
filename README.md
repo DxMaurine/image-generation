@@ -41,7 +41,6 @@ Make sure to set your environment variables for Supabase and Pollinations API in
 
 🧪 Demo
 Try it live: (https://image-generation-opal-psi.vercel.app/)
-Or interact via Telegram: @YourBotUsername
 
 🙌 Contributing
 We welcome contributions! Open an issue or fork the repo to submit pull requests.
