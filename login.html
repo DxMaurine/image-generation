@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .login-container {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    h2 {
+      color: #333;
+      margin-bottom: 24px;
+      font-weight: 600;
+    }
+
+    #tokenInput {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      transition: border-color 0.3s;
+    }
+
+    #tokenInput:focus {
+      outline: none;
+      border-color: #4a90e2;
+    }
+
+    button {
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #3a7bc8;
+    }
+
+    #status {
+      margin-top: 20px;
+      color: #e74c3c;
+      font-size: 14px;
+      min-height: 20px;
+    }
+
+    @media (max-width: 480px) {
+      .login-container {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Masukkan Token Akses</h2>
+    <input type="text" id="tokenInput" placeholder="Token" />
+    <button onclick="checkToken()">Login</button>
+    <p id="status"></p>
+  </div>
+
+  <script>
+    async function checkToken() {
+      const token = document.getElementById('tokenInput').value.trim();
+      const status = document.getElementById('status');
+
+      if (!token) {
+        status.innerText = "Harap isi token terlebih dahulu.";
+        return;
+      }
+
+      const url = `https://wuszigmegagdwlbjftpm.supabase.co/rest/v1/access_key?token=eq.${token}&is_used=eq.false&expires_at=gt.${new Date().toISOString()}`;
+
+      const res = await fetch(url, {
+        headers: {
+          'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind1c3ppZ21lZ2FnZHdsYmpmdHBtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDcwMDM4MzIsImV4cCI6MjA2MjU3OTgzMn0.QNbieip8O2I4fjkcS6DtS13jgmZC87uov4AjICuvELU',
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind1c3ppZ21lZ2FnZHdsYmpmdHBtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDcwMDM4MzIsImV4cCI6MjA2MjU3OTgzMn0.QNbieip8O2I4fjkcS6DtS13jgmZC87uov4AjICuvELU'
+        }
+      });
+
+      const data = await res.json();
+
+      if (data.length > 0) {
+        // Redirect ke dashboard (atau halaman utama kamu)
+        window.location.href = 'dashboard.html';
+      } else {
+        status.innerText = "Token tidak valid atau sudah kedaluwarsa.";
+      }
+    }
+  </script>
+</body>
+</html>
