@@ -100,7 +100,7 @@
         return;
       }
 
-      const url = `https://wuszigmegagdwlbjftpm.supabase.co/rest/v1/access_key?token=eq.${token}&is_used=eq.false&expires_at=gt.${new Date().toISOString()}`;
+      const url = `https://wuszigmegagdwlbjftpm.supabase.co/rest/v1/access_keys?token=eq.${token}&is_used=eq.false&expires_at=gt.${new Date().toISOString()}`;
 
       const res = await fetch(url, {
         headers: {
